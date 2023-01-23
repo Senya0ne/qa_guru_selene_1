@@ -10,7 +10,7 @@ def test_student_registration_form():
     browser.element('#firstName').type('Sergei')
     browser.element('#lastName').type('Vasilchenko')
     browser.element('#userEmail').type('test@test.com')
-    browser.element('[for=gender-radio-1]').click()
+    browser.all('[name=gender]').element_by(have.value('Male')).element('..').click()
     browser.element('#userNumber').type('1234567890')
     browser.element('#dateOfBirthInput').click()
     browser.element('.react-datepicker__month-select').type('January')
@@ -28,7 +28,7 @@ def test_student_registration_form():
     browser.element('[class^=modal-title]').should(have.text('Thanks for submitting the form'))
     browser.all('.table>tbody>tr').should(have.size_greater_than_or_equal(10))
     browser.all('.table>tbody>tr>td').should(have.size_greater_than_or_equal(20))
-    browser.all('.table>tbody>tr>td:nth-child(2)').should(
+    browser.all('.table>tbody>tr>td:nth-of-type(2)').should(
         have.exact_texts('Sergei Vasilchenko', 'test@test.com', 'Male', '1234567890',
                          '31 January,1993', 'Maths',
                          'Sports', 'image.png', 'Varshavskoe road, 1', 'NCR Delhi'))
