@@ -1,33 +1,26 @@
-import os
-
 from selene.support.shared import browser
-from selene import have, command
+from selene import have
 
 from demoqa_tests.model import registration_form
-from demoqa_tests.utils import scailing
+from demoqa_tests.utils import scailing, file, scroll
 
 
 def test_student_registration_form():
     registration_form.given_opened()
     scailing.zoom_out(0.7)
 
-    browser.element('#firstName').type('Sergei')
-    browser.element('#lastName').type('Vasilchenko')
-    browser.element('#userEmail').type('test@test.com')
-    browser.all('[name=gender]').element_by(have.value('Male')).element('..').click()
-    browser.element('#userNumber').type('1234567890')
+    registration_form.type_first_name('Sergei')
+    registration_form.type_last_name('Vasilchenko')
+    registration_form.type_email('test@test.com')
+    registration_form.select_gender('Male')
+    registration_form.type_phone_number('1234567890')
+    registration_form.select_date_of_birth(year='1993', month='January', day_value='31')
 
-    browser.element('#dateOfBirthInput').click()
-    browser.element('.react-datepicker__month-select').type('January')
-    browser.element('.react-datepicker__year-select').type('1993')
-    browser.element('[class$="react-datepicker__day--031 react-datepicker__day--weekend"]').click()
-
-    browser.element('#subjectsInput').type('Maths')
-    browser.all('.subjects-auto-complete__option').element_by(have.exact_text('Maths')).click()
-    browser.element('[for=hobbies-checkbox-1]').click()
-    browser.element('#uploadPicture').send_keys(
-        os.path.abspath(os.path.join(os.path.dirname(__file__), '../files/image.png')))
-    browser.element('#currentAddress').type('Varshavskoe road, 1').perform(command.js.scroll_into_view)
+    registration_form.type_subject('Maths')
+    registration_form.select_hobby('Sports')
+    file.upload_image()
+    scroll.to('#currentAddress')
+    registration_form.type_address('Varshavskoe road, 1')
     registration_form.select_state('NCR')
     registration_form.select_city('Delhi')
 
