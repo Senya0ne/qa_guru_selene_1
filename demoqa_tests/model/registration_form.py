@@ -60,8 +60,7 @@ def select_hobby(hobby: str):
 
 
 def assert_table_fields(*args):
-    browser.element('.table').all('td').even.should(
-        have.texts(args))
+    browser.element('.table').all('td').even.should(have.texts(args))
 
 
 def assert_modal_title_text(text: str):
