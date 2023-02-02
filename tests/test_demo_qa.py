@@ -1,6 +1,3 @@
-from selene.support.shared import browser
-from selene import have
-
 from demoqa_tests.model import registration_form
 from demoqa_tests.utils import scailing, file, scroll
 
@@ -26,10 +23,9 @@ def test_student_registration_form():
 
     registration_form.submit()
 
-    browser.element('[class^=modal-title]').should(have.text('Thanks for submitting the form'))
-    browser.all('.table>tbody>tr').should(have.size_greater_than_or_equal(10))
-    browser.all('.table>tbody>tr>td').should(have.size_greater_than_or_equal(20))
-    browser.all('.table>tbody>tr>td:nth-of-type(2)').should(
-        have.exact_texts('Sergei Vasilchenko', 'test@test.com', 'Male', '1234567890',
-                         '31 January,1993', 'Maths',
-                         'Sports', 'image.png', 'Varshavskoe road, 1', 'NCR Delhi'))
+    registration_form.assert_modal_title_text('Thanks for submitting the form')
+    registration_form.assert_table_lines(10)
+    registration_form.assert_table_values(10)
+    registration_form.assert_table_fields('Sergei Vasilchenko', 'test@test.com', 'Male', '1234567890',
+                                          '31 January,1993', 'Maths',
+                                          'Sports', 'image.png', 'Varshavskoe road, 1', 'NCR Delhi')

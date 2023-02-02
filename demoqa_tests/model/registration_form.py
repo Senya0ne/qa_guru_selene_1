@@ -1,5 +1,5 @@
 from selene.support.shared import browser
-from selene import have, command
+from selene import have
 from demoqa_tests.controls import dropdown
 
 
@@ -57,3 +57,20 @@ def type_address(address: str):
 
 def select_hobby(hobby: str):
     browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
+
+
+def assert_table_fields(*args):
+    browser.element('.table').all('td').even.should(
+        have.texts(args))
+
+
+def assert_modal_title_text(text: str):
+    browser.element('[class^=modal-title]').should(have.text(text))
+
+
+def assert_table_values(value: int):
+    browser.all('.table>tbody>tr>td').should(have.size_greater_than_or_equal(value))
+
+
+def assert_table_lines(value: int):
+    browser.all('.table>tbody>tr').should(have.size_greater_than_or_equal(value))

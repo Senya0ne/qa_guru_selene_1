@@ -1,5 +1,5 @@
 from selene.support.shared import browser
-from selene import have, command
+from selene import have
 
 
 def select(selector, by_text):
