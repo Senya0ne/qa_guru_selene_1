@@ -25,7 +25,7 @@ def test_student_registration_form():
 
     registration_form.assert_modal_title_text('Thanks for submitting the form')
     registration_form.assert_table_lines(10)
-    registration_form.assert_table_values(10)
+    registration_form.assert_table_values(20)
     registration_form.assert_table_fields('Sergei Vasilchenko', 'test@test.com', 'Male', '1234567890',
                                           '31 January,1993', 'Maths',
                                           'Sports', 'image.png', 'Varshavskoe road, 1', 'NCR Delhi')
