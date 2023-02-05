@@ -1,6 +1,6 @@
 from selene.support.shared import browser
 from selene import have
-from demoqa_tests.controls import dropdown
+from demoqa_tests.controls import dropdown, radiobutton, checkbox, datepicker
 
 
 def given_opened():
@@ -21,13 +21,13 @@ def select_city(value: str):
 
 
 def select_gender(gender: str):
-    browser.all('[name=gender]').element_by(have.value(gender)).element('..').click()
+    radiobutton.select_gender(selector='[name=gender]', gender=gender)
 
 
 def select_date_of_birth(year: str, month: str, day_value: str):
     browser.element('#dateOfBirthInput').click()
-    browser.element('.react-datepicker__month-select').type(month)
-    browser.element('.react-datepicker__year-select').type(year)
+    datepicker.select(selector='.react-datepicker__month-select', value=month)
+    datepicker.select(selector='.react-datepicker__year-select', value=year)
     browser.element(f'[class$="react-datepicker__day--0{day_value} react-datepicker__day--weekend"]').click()
 
 
@@ -56,7 +56,7 @@ def type_address(address: str):
 
 
 def select_hobby(hobby: str):
-    browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
+    checkbox.select_hobby(selector='[for^=hobbies-checkbox]', hobby=hobby)
 
 
 def assert_table_fields(*args):
