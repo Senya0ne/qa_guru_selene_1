@@ -5,7 +5,7 @@ from demoqa_tests.controls import dropdown, radiobutton, checkbox, datepicker
 
 class RegistrationPage:
 
-    def given_opened(self):
+    def open(self):
         browser.open('/automation-practice-form')
         browser.element('.practice-form-wrapper').should(have.text('Student Registration Form'))
 
@@ -48,14 +48,14 @@ class RegistrationPage:
     def select_hobby(self, hobby: str):
         checkbox.select_hobby(selector='[for^=hobbies-checkbox]', hobby=hobby)
 
-    def assert_table_fields(self, *args):
+    def should_have_registered(self, *args):
         browser.element('.table').all('td').even.should(have.texts(args))
 
-    def assert_modal_title_text(self, text: str):
+    def should_have_modal_title_text(self, text: str):
         browser.element('[class^=modal-title]').should(have.text(text))
 
-    def assert_table_values(self, value: int):
+    def should_have_table_values(self, value: int):
         browser.all('.table>tbody>tr>td').should(have.size_greater_than_or_equal(value))
 
-    def assert_table_lines(self, value: int):
+    def should_have_table_lines(self, value: int):
         browser.all('.table>tbody>tr').should(have.size_greater_than_or_equal(value))
